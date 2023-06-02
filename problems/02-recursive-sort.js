@@ -10,9 +10,36 @@
 */
 
 function sort(nums) {
-    // Your code here
-}
+    if (nums.length <= 1) {
+      return nums;
+       // Base case: Return the array when it has 0 or 1 element
+    }
 
+    const pivot = nums[0];
+    // Choose the first element as the pivot
+    const lesser = [];
+    // Array to hold elements smaller than the pivot
+    const greater = [];
+    // Array to hold elements greater than the pivot
+
+    for (let i = 1; i < nums.length; i++) {
+      if (nums[i] < pivot) {
+        lesser.push(nums[i]);
+        // Add smaller elements to the `lesser` array
+      } else {
+        greater.push(nums[i]);
+        // Add greater elements to the `greater` array
+      }
+    }
+
+    const sortedLesser = sort(lesser);
+    // Recursively sort the `lesser` array
+    const sortedGreater = sort(greater);
+     // Recursively sort the `greater` array
+
+    return sortedLesser.concat(pivot, sortedGreater);
+    // Concatenate the sorted sub-arrays
+  }
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 try {
     module.exports = sort;

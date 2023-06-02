@@ -25,10 +25,34 @@ console.log(preserveFunc2('boolean')); // prints [ true, false ]
 Note: the mocha tests do not test that your solution is implemented recursively.
 However, for bonus points try to solve it both with recursion and iteration.
 */
-
 function recursivePreserveType(array) {
-    // Your code here
-}
+    // Return a function that filters the input array by the specified type
+    return function(type) {
+      // Helper function to recursively filter the array by type
+      function filterByType(arr, t) {
+        // Base case: Check if the array is empty
+        if (arr.length === 0) {
+          return [];
+        }
+
+        // Recursive case: Destructure the array into the first element and the rest of the elements
+        const [first, ...rest] = arr;
+
+        // Check type match: If the type of the first element matches the specified type
+        if (typeof first === t) {
+          // Return an array with the first element followed by the result of recursively filtering the rest of the array
+          return [first, ...filterByType(rest, t)];
+        }
+
+        // Type mismatch: Return the result of recursively filtering the rest of the array
+        return filterByType(rest, t);
+      }
+
+      // Invoke the filterByType helper function with the input array and the specified type
+      return filterByType(array, type);
+    };
+  }
+
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 try {

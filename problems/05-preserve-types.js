@@ -24,10 +24,14 @@ console.log(preserveFunc2('object')); // prints [ { color: 'red' }, [4, 5] ];
 console.log(preserveFunc2('boolean', 'string', 'undefined')); // prints [ undefined, 'world', true, 'hello', false ]
 
 */
-
 function preserveTypes(array) {
-    // Your code here
-}
+    // Closure: Returns a function that filters the input
+    //array based on specified types
+    return function(...types) {
+      // Filter the array based on the specified types
+      return array.filter(element => types.includes(typeof element));
+    };
+  }
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 try {
